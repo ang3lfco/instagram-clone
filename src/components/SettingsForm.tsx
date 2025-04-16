@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function SettingsForm({userEmail, profile}:{userEmail: string, profile: Profile}){
     const router = useRouter();
-    const fileInRef = useRef<HTMLInputElement>();
+    const fileInRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File|null>(null);
     const [avatar, setAvatar] = useState(profile.avatar);
     useEffect(() => {
@@ -30,15 +30,15 @@ export default function SettingsForm({userEmail, profile}:{userEmail: string, pr
             router.push('/profile');
             router.refresh();
         }}>
-            <input type="hidden" name="avatar" value={avatar}/>
+            <input type="hidden" name="avatar" value={avatar || ''}/>
             <div className="flex gap-2 items-center">
                 <div>
                     <div className="bg-gray-400 size-24 rounded-full aspect-square overflow-hidden shadow-md shadow-gray-400">
-                        <img className="size-24" src={avatar} alt=""/>
+                        <img className="size-24" src={avatar || ''} alt=""/>
                     </div>
                 </div>
                 <div>
-                    <input type="file" ref={fileInRef} className="hidden" onChange={ev => setFile(ev.target.files?.[0])}/>
+                    <input type="file" ref={fileInRef} className="hidden" onChange={ev => setFile(ev.target.files?.[0] || null)}/>
                     <Button type="button" variant="soft" onClick={() => fileInRef.current?.click()}>
                         <CloudUpload/>
                         change avatar

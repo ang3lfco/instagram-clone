@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import PostsGrid from "@/components/PostsGrid";
+import ProfilePosts from "@/components/ProfilePosts";
 import { prisma } from "@/db";
 
 import { Check, ChevronLeft, Settings } from "lucide-react";
@@ -44,7 +45,7 @@ export default async function ProfilePage(){
                 </p>
             </section>
             <section className="mt-4">
-                <PostsGrid/>
+                <ProfilePosts email={profile.email}/>
             </section>
         </main>
     );

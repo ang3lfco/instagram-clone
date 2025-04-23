@@ -4,12 +4,21 @@ import SessionComentForm from "@/components/SessionCommentForm";
 import { prisma } from "@/db";
 import { Suspense } from "react";
 import {uniq} from 'lodash';
+import { Bookmark, Heart } from "lucide-react";
+import LikesInfo from "@/components/LikesInfo";
+import { getSessionEmailOrThrow } from "@/actions";
 
 export default async function SinglePostPage({params}:{params:{id:string}}){
     const post = await prisma.post.findFirstOrThrow({where:{id:params.id}});
     const authorProfile = await prisma.profile.findFirstOrThrow({where:{email:post.author}});
     const comments = await prisma.comment.findMany({where:{postId:post.id}});
     const commentsAuthors = await prisma.profile.findMany({where:{email:{in: uniq(comments.map(c => c.author))}}})
+    const myLike = await prisma.like.findFirst({
+        where:{
+            author: await getSessionEmailOrThrow(),
+            postId: post.id,
+        }
+        });
     return(
         <div>
             <div className="grid md:grid-cols-2 gap-4">
@@ -25,7 +34,15 @@ export default async function SinglePostPage({params}:{params:{id:string}}){
                             </div>
                         ))}
                     </div>
-                    <div className="pt-8 border-t mt-8">
+                    <div className="flex text-gray-700 items-center justify-between gap-2 py-4 border-t mt-4 border-t-gray-300">
+                        <LikesInfo post={post} sessionLike={myLike}/>
+                        <div>
+                            <button className="flex items-center">
+                                <Bookmark/>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="pt-8 border-t">
                         <Suspense>
                             <SessionComentForm postId={post.id}/>
                         </Suspense>

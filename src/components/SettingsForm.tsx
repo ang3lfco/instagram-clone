@@ -7,11 +7,11 @@ import { useRouter } from "next/navigation";
 import { Profile } from "@prisma/client";
 import { useEffect, useRef, useState } from "react";
 
-export default function SettingsForm({userEmail, profile}:{userEmail: string, profile: Profile}){
+export default function SettingsForm({profile}:{profile?: Profile | null}){
     const router = useRouter();
     const fileInRef = useRef<HTMLInputElement>(null);
     const [file, setFile] = useState<File|null>(null);
-    const [avatar, setAvatar] = useState(profile.avatar);
+    const [avatar, setAvatar] = useState(profile?.avatar || null);
     useEffect(() => {
         if(file){
             const data = new FormData();
@@ -26,7 +26,7 @@ export default function SettingsForm({userEmail, profile}:{userEmail: string, pr
     }, [file]);
     return(
         <form action={async (data:FormData) => {
-            await updateProfile(data, userEmail);
+            await updateProfile(data);
             router.push('/profile');
             router.refresh();
         }}>
@@ -46,18 +46,18 @@ export default function SettingsForm({userEmail, profile}:{userEmail: string, pr
                 </div>
             </div>
             <p className="mt-2 font-bold">username</p>
-            <TextField.Root name="username" defaultValue={profile.username || ''} placeholder="your_username"/>
+            <TextField.Root name="username" defaultValue={profile?.username || ''} placeholder="your_username"/>
             
             <p className="mt-2 font-bold">name</p>
-            <TextField.Root name="name" defaultValue={profile.name || ''} placeholder="John Doe"/>
+            <TextField.Root name="name" defaultValue={profile?.name || ''} placeholder="John Doe"/>
             
             <p className="mt-2 font-bold">subtitle</p>
-            <TextField.Root name="subtitle" defaultValue={profile.subtitle || ''} placeholder="Graphic designer"/>
+            <TextField.Root name="subtitle" defaultValue={profile?.subtitle || ''} placeholder="Graphic designer"/>
             
             <p className="mt-2 font-bold">bio</p>
-            <TextArea name="bio" defaultValue={profile.bio || ''}/>
+            <TextArea name="bio" defaultValue={profile?.bio || ''}/>
             
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex justify-center">
                 <Button variant="solid">Save settings</Button>
             </div>
         </form>

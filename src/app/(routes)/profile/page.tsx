@@ -2,16 +2,19 @@ import { auth } from "@/auth";
 import PostsGrid from "@/components/PostsGrid";
 import ProfilePosts from "@/components/ProfilePosts";
 import { prisma } from "@/db";
-
 import { Check, ChevronLeft, Settings } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage(){
     const session = await auth();
     if(!session?.user?.email){
         return 'not logged in';
     }
-    const profile = await prisma.profile.findFirstOrThrow({where:{email:session?.user?.email as string}});
+    const profile = await prisma.profile.findFirst({where:{email:session?.user?.email as string}});
+    if(!profile){
+        return redirect('/settings');
+    }
     return(
         <main>
             <section className="flex justify-between items-center">

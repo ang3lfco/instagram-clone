@@ -12,7 +12,7 @@ export default async function SettingsPage(){
         where: {email: session.user.email},
     });
     return(
-        <div className="max-w-md mx-auto">
+        <div className="max-w-sm mx-auto">
             <h1 className="text-2xl font-bold mb-4 text-center">
                 Profile settings
             </h1>

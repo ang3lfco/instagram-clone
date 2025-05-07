@@ -5,7 +5,15 @@ import { Heart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function LikesInfo({post, sessionLike}:{post:Post, sessionLike: Like|null}){
+export default function LikesInfo({
+    post, 
+    sessionLike,
+    showText=true,
+}:{
+    post:Post; 
+    sessionLike: Like|null;
+    showText?: boolean;
+}){
     const router = useRouter();
     const [likedByMe, setLikedByMe] = useState(!!sessionLike);
     return(
@@ -28,7 +36,11 @@ export default function LikesInfo({post, sessionLike}:{post:Post, sessionLike: L
                 <button type="submit" >
                     <Heart className={likedByMe ? 'text-red-500 fill-red-500' : ''}/>
                 </button>
-            {post.likesCount} people like this
+                {showText && (
+                    <p>
+                        {post.likesCount} people like this
+                    </p>
+                )}
         </form>
     );
 }

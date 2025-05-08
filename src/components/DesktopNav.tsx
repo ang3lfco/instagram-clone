@@ -15,9 +15,9 @@ export default function DesktopNav(){
                 <Search/>
                 Search
                 </Link>
-                <Link href={'/browser'}>
+                <Link href={'/browse'}>
                 <LayoutGrid/>
-                Browser
+                Browse
                 </Link>
                 <Link href={'/profile'}>
                 <User/>

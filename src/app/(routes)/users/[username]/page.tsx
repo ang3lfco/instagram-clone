@@ -7,6 +7,7 @@ export default async function UserProfilePage({
 }: {
     params: {username:string};
 }){
+    const sessionEmail = await getSessionEmail() || '';
     const profile = await prisma.profile.findFirstOrThrow({
         where: {
             username: username
@@ -14,11 +15,11 @@ export default async function UserProfilePage({
     });
     const ourFollow = await prisma.follower.findFirst({
         where: {
-            followingProfileEmail: await getSessionEmail() || '',
+            followingProfileEmail: sessionEmail,
             followedProfileId: profile.id,
         },
     });
     return(
-        <ProfilePageContent ourFollow={ourFollow} profile={profile}/>
+        <ProfilePageContent isOurProfile={profile.email === sessionEmail} ourFollow={ourFollow} profile={profile}/>
     );
 }

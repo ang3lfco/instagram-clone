@@ -38,8 +38,8 @@ export default function PostsGrid({posts}:{posts:Post[]}){
                 className="flex -ml-4"
                 columnClassName="pl-4">
                 {posts.map((post, index) => (
-                    <Link href={`/posts/${post.id}`} key={post.id} className='mb-4'>
-                        <img className='rounded-lg mb-4' src={post.image} alt=""/>
+                    <Link href={`/posts/${post.id}`} key={post.id} className='block mb-4'>
+                        <img className='rounded-lg' src={post.image} alt=""/>
                     </Link>
                 ))}
             </Masonry>

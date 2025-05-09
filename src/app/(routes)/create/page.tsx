@@ -8,10 +8,12 @@ import { useEffect, useRef, useState } from "react";
 export default function CreatePage(){
     const [imageUrl, setImageUrl] = useState('');
     const [file, setFile] = useState<File|null>(null);
+    const [isUploading, setIsUploading] = useState(false);
     const fileInRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     useEffect(() => {
         if(file){
+            setIsUploading(true);
             const data = new FormData();
             data.set("file", file);
             fetch("/api/upload", {
@@ -20,6 +22,7 @@ export default function CreatePage(){
             }).then(response => {
                 response.json().then(url => {
                     setImageUrl(url);
+                    setIsUploading(false);
                 });
             });
         }
@@ -39,16 +42,17 @@ export default function CreatePage(){
                         )}
                         <div className="absolute inset-0 flex items-center justify-center">
                             <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef}/>
-                            <Button onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
-                                <CloudUpload size={16}/>
-                                Choose image
+                            <Button disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
+                                {!isUploading && (
+                                    <CloudUpload size={16}/>
+                                )}
+                                {isUploading ? 'Uploading...' : 'Choose image'}
                             </Button>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">
                     <TextArea name="description" className="h-16" placeholder="Add photo description..."/>
-                    
                 </div>
             </div>
             <div className="flex mt-4 justify-center">

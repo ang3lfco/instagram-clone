@@ -7,7 +7,7 @@ import { PlusIcon } from "lucide-react";
 export default async function HomeTopRow({follows, profiles}:{follows:Follower[], profiles:Profile[]}){
     
     return(
-        <div className="flex gap-3">
+        <div className="flex gap-3 max-w-full overflow-auto">
             <div>
                 <button className="size-24 bg-gradient-to-tr from-ig-orange to-ig-red text-white rounded-full flex items-center justify-center">
                     <PlusIcon size="42"/>

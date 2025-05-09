@@ -1,3 +1,4 @@
+import Preloader from "@/components/Preloader";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
 import { Suspense } from "react";
@@ -13,7 +14,7 @@ export default async function SearchPage({
             <div className="max-w-md mx-auto">
                 <SearchForm/>
                 {typeof query !== 'undefined' && (
-                    <Suspense fallback="Loading...">
+                    <Suspense fallback={<Preloader/>}>
                         <SearchResults query={query}/>
                     </Suspense>
                 )}

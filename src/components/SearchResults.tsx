@@ -23,10 +23,10 @@ export default async function SearchResults({query}: {query:string}){
     return(
         <div>
             <h1 className="text-lg mt-4">
-                results for "{query}"
+                Search results for "{query}"
             </h1>
             {profiles?.length > 0 && (
-                <div className="grid mt-4 grid-cols-2 gap-2">
+                <div className="grid mt-4 sm:grid-cols-2 gap-2">
                     {profiles.map(profile => (
                         <Link href={`/users/${profile.username}`} className="flex gap-2 bg-gray-200 border border-gray-300 p-2 rounded-full">
                             <div>

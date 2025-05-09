@@ -5,6 +5,7 @@ import LikesInfo from "./LikesInfo";
 import { getSessionEmailOrThrow } from "@/actions";
 import { Bookmark, BookMarked } from "lucide-react";
 import Link from "next/link";
+import BookmarkButton from "./BookmarkButton";
 
 export default async function HomePosts({follows, profiles}:{follows:Follower[], profiles:Profile[]}){
     const posts = await prisma.post.findMany({
@@ -17,6 +18,13 @@ export default async function HomePosts({follows, profiles}:{follows:Follower[],
         take: 100,
     });
     const likes = await prisma.like.findMany({
+        where: {
+            author: await getSessionEmailOrThrow(),
+            postId: {in: posts.map(p => p.id)},
+        },
+    });
+
+    const bookmarks = await prisma.bookmark.findMany({
         where: {
             author: await getSessionEmailOrThrow(),
             postId: {in: posts.map(p => p.id)},
@@ -38,9 +46,7 @@ export default async function HomePosts({follows, profiles}:{follows:Follower[],
                             </div>
                             <div className="flex gap-2 items-center">
                                 <LikesInfo post={post} showText={false} sessionLike={likes.find(like => like.postId === post.id) || null}/>
-                                <button>
-                                    <Bookmark/>
-                                </button>
+                                <BookmarkButton post={post} sessionBookmark={bookmarks.find(b => b.postId === post.id) || null}/>
                             </div>
                         </div>
                         <p className="mt-2 text-slate-600">

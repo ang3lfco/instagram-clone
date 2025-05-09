@@ -104,8 +104,15 @@ export async function getSinglePostData(postId:string){
             postId: post.id,
         }
     });
+    const myBookmark = await prisma.bookmark.findFirst({
+        where:{
+            author: await getSessionEmailOrThrow(),
+            postId: post.id,
+        }
+    });
+
     return{
-        post, authorProfile, comments, commentsAuthors, myLike
+        post, authorProfile, comments, commentsAuthors, myLike, myBookmark
     }
 }
 
@@ -128,5 +135,25 @@ export async function unfollowProfile(profileIdToFollow: string){
             followingProfileEmail: sessionProfile.email,
             followingProfileId: sessionProfile.id,
         },
+    });
+}
+
+export async function bookmarkPost(postId:string){
+    const sessionEmail = await getSessionEmailOrThrow();
+    await prisma.bookmark.create({
+        data:{
+            author: sessionEmail,
+            postId
+        }
+    });
+}
+
+export async function unbookmarkPost(postId:string){
+    const sessionEmail = await getSessionEmailOrThrow();
+    await prisma.bookmark.deleteMany({
+        where:{
+            author: sessionEmail,
+            postId
+        }
     });
 }

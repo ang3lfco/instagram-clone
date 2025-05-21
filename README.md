@@ -33,6 +33,7 @@ A professional full-stack clone of Instagram built with **Next.js**, **Prisma**,
 ### Creating a New Post
 ![2025-05-21 02-53-07](https://github.com/user-attachments/assets/96a0e73e-9990-4eb4-b37e-00a1f4b7fb1c)
 
+🔐
 ### Signing in with Google
 ![2025-05-21 02-58-16](https://github.com/user-attachments/assets/d45ba931-0261-4d6d-97eb-9c96d0dc9256)
 

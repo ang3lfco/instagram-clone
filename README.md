@@ -1,3 +1,6 @@
+# Instagram Clone
+A professional full-stack clone of Instagram built with **Next.js**, **Prisma**, **Pinata** and other modern technologies. This project replicates the core features of Instagram such as authentication, image uploads, likes, comments, user profiles, and more.
+
 ![2025-05-21 02-32-24](https://github.com/user-attachments/assets/15b7150f-94c6-443c-87ef-2074348c302b)
 ![2025-05-21 02-32-58](https://github.com/user-attachments/assets/e84d83ae-7118-483f-813f-9cd13db8eb0c)
 ![2025-05-21 02-33-37](https://github.com/user-attachments/assets/31cc6a89-0823-490c-81a7-b7ac0dd56ec7)

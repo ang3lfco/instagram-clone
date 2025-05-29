@@ -30,10 +30,10 @@ export default function PostsGrid({posts}:{posts:Post[]}){
         <div className='max-w-4xl mx-auto'>
             <Masonry
                 breakpointCols={{
-                    default: 4,
+                    default: 3,
                     1100: 3,
                     700: 2,
-                    500: 1
+                    500: 2
                 }}
                 className="flex -ml-4"
                 columnClassName="pl-4">

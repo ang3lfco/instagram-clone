@@ -8,40 +8,45 @@ export default async function SearchResults({query}: {query:string}){
     const profiles = await prisma.profile.findMany({
         where: {
             OR: [
-                {username:{contains: query},},
-                {name:{contains: query},},
+                {username:{contains: query, mode: 'insensitive'},},
+                {name:{contains: query, mode: 'insensitive'},},
             ]
         },
         take: 10,
     });
     const posts = await prisma.post.findMany({
         where: {
-            description: {contains: query},
+            description: {contains: query, mode: 'insensitive'},
         },
         take: 100,
     })
     return(
         <div>
-            <h1 className="text-lg mt-4">
+            {/* <h1 className="text-sm mt-4">
                 Search results for "{query}"
+            </h1> */}
+            <h1 className="text-sm mt-4">
+                Profiles found: 
             </h1>
             {profiles?.length > 0 && (
-                <div className="grid mt-4 sm:grid-cols-2 gap-2">
+                <div className="grid mt-4 sm:grid-cols-1 gap-2">
                     {profiles.map(profile => (
-                        <Link href={`/users/${profile.username}`} className="flex gap-2 bg-gray-200 border border-gray-300 p-2 rounded-full">
+                        <Link href={`/users/${profile.username}`} className="flex items-center gap-2 hover:bg-gray-100 transition p-2 rounded-lg">
                             <div>
                                 <Avatar size="5" radius="full" fallback="user avatar" src={profile.avatar || ''}/>
                             </div>
                             <div>
-                                <h3>{profile.name}</h3>
-                                <h4 className="text-gray-500 text-sm">@{profile.username}</h4>
+                                <h3 className="font-bold">{profile.name}</h3>
+                                <h4 className="text-gray-600 text-sm">@{profile.username}</h4>
                             </div>
                         </Link>
                     ))}
                 </div>
             )}
+             <h1 className="text-sm mt-4">
+                Posts found: 
+            </h1>
             <div className="mt-4">
-                posts:
                 <PostsGrid posts={posts}/>
             </div>
         </div>

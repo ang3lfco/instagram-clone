@@ -32,13 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-y-scroll`}
       >
         <Theme>
           {modal}
           <div className="flex min-h-screen">
             <DesktopNav/>
-            <div className="pb-24 ld:pb-4 pt-4 px-4 lg:px-8 w-full flex justify-around">
+            <div className="pb-20 ld:pb-4 pt-4 px-4 lg:px-8 w-full flex justify-around">
               <div className="w-full">
                 {children}
               </div>

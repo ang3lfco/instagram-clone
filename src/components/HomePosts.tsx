@@ -3,7 +3,6 @@ import { Follower, Profile } from "@prisma/client";
 import { Avatar } from "@radix-ui/themes";
 import LikesInfo from "./LikesInfo";
 import { getSessionEmailOrThrow } from "@/actions";
-import { Bookmark, BookMarked } from "lucide-react";
 import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 
@@ -35,23 +34,26 @@ export default async function HomePosts({follows, profiles}:{follows:Follower[],
             {posts.map(post => {
                 const profile = profiles.find(p => p.email === post.author);
                 return (
-                    <div key={post.id} className="">
-                        <Link href={`/posts/${post.id}`}>
-                            <img className="block rounded-lg shadow-md shadow-black/50" src={post.image} alt=""/>
-                        </Link>
-                        <div className="flex mt-4 items-center gap-2 justify-between">
+                    <div key={post.id} className="border border-gray-200 p-2 rounded-xl">
+                        <div className="flex mt-4 items-center gap-2 justify-between mb-3">
                             <div className="flex gap-2 items-center">
                                 <Avatar radius="full" src={profile?.avatar || ''} size="4" fallback="avatar"/>
-                                <Link className="font-bold" href={`/users/${profile?.username}`}>{profile?.name}</Link>
+                                <Link className="font-bold" href={`/users/${profile?.username}`}>{profile?.username}</Link>
                             </div>
+                        </div>
+                        <Link href={`/posts/${post.id}`}>
+                            <img className="block rounded-md border border-gray-300" src={post.image} alt=""/>
+                        </Link>
+                        <div className="flex mt-4 mb-4 items-center gap-2 justify-between">
+                            <p className="mt-2 text-slate-600">
+                                <Link className="font-bold mr-2" href={`/users/${profile?.username}`}>{profile?.username}</Link>
+                                {post.description}
+                            </p>
                             <div className="flex gap-2 items-center">
                                 <LikesInfo post={post} showText={false} sessionLike={likes.find(like => like.postId === post.id) || null}/>
                                 <BookmarkButton post={post} sessionBookmark={bookmarks.find(b => b.postId === post.id) || null}/>
                             </div>
                         </div>
-                        <p className="mt-2 text-slate-600">
-                            {post.description}
-                        </p>
                     </div>
                 );
             })}

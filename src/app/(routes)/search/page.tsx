@@ -13,7 +13,7 @@ export default async function SearchPage({
         <div className="w-full">
             <div className="max-w-md mx-auto">
                 <SearchForm/>
-                {typeof query !== 'undefined' && (
+                {query?.trim() && (
                     <Suspense fallback={<Preloader/>}>
                         <SearchResults query={query}/>
                     </Suspense>

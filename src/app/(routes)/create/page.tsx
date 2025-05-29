@@ -11,6 +11,8 @@ export default function CreatePage(){
     const [isUploading, setIsUploading] = useState(false);
     const fileInRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const [username, setUsername] = useState('');
+    const [profilePic, setProfilePic] = useState('');
     useEffect(() => {
         if(file){
             setIsUploading(true);
@@ -27,40 +29,60 @@ export default function CreatePage(){
             });
         }
     }, [file]);
+    useEffect(() => {
+        fetch("/api/profile")
+        .then(res => res.json())
+        .then(data => {
+            if(!data.error){
+                console.log("username: " + data.username);
+                setUsername(data.username);
+                setProfilePic(data.avatar);
+            }
+        })
+    }, []);
     return(
-        <form className="max-w-md mx-auto" action={async data => {
-            const id = await postEntry(data);
-            router.replace(`/posts/${id}`);
-            router.refresh();
-        }}>
-            <input type="hidden" name="image" value={imageUrl}/>
-            <div className="flex flex-col gap-4">
-                <div>
-                    <div className="min-h-64 p-2 bg-gray-400 rounded-md relative">
-                        {imageUrl && (
-                            <img src={imageUrl} className="rounded-md" alt=""/>
-                        )}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef}/>
-                            <Button disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
-                                {!isUploading && (
-                                    <CloudUpload size={16}/>
-                                )}
-                                {isUploading ? 'Uploading...' : 'Choose image'}
-                            </Button>
+        <div className="flex items-center justify-center min-h-screen">
+            <form className="w-full max-w-md bg-white shadow-md rounded-md p-6" action={async data => {
+                const id = await postEntry(data);
+                router.replace(`/posts/${id}`);
+                router.refresh();
+            }}>
+                <input type="hidden" name="image" value={imageUrl}/>
+                <div className="flex flex-col gap-4">
+                    <div>
+                        <div className="min-h-64 p-2 bg-gray-400 rounded-md relative">
+                            {imageUrl && (
+                                <img src={imageUrl} className="rounded-md" alt=""/>
+                            )}
+                            <div className="absolute inset-0 flex items-center justify-center">
+                                <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef}/>
+                                <Button disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
+                                    {!isUploading && (
+                                        <CloudUpload size={16}/>
+                                    )}
+                                    {isUploading ? 'Uploading...' : 'Choose image'}
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2">
-                    <TextArea name="description" className="h-16" placeholder="Add photo description..."/>
+                <div className="mt-4 justify-center border border-gray-100 p-4">
+                    <div className="flex items-center mb-4">
+                        {profilePic && (
+                            <img src={profilePic} alt="" className="w-10 rounded-full mr-2" />
+                        )}
+                        <div className="">{username}</div>
+                        
+                    </div>
+                    <div className="flex flex-col gap-2 mb-4">
+                        <TextArea name="description" className="h-16" placeholder="Add post description..."/>
+                    </div>
+                    <Button>
+                        <Send size={16}/>
+                        Publish
+                    </Button>
                 </div>
-            </div>
-            <div className="flex mt-4 justify-center">
-                <Button>
-                    <Send size={16}/>
-                    Publish
-                </Button>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }

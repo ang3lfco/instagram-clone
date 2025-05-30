@@ -35,7 +35,7 @@ export default async function HomePosts({follows, profiles}:{follows:Follower[],
                 const profile = profiles.find(p => p.email === post.author);
                 return (
                     <div key={post.id} className="border border-gray-200 p-2 rounded-xl">
-                        <div className="flex mt-4 items-center gap-2 justify-between mb-3">
+                        <div className="flex mt-2 items-center gap-2 justify-between mb-3">
                             <div className="flex gap-2 items-center">
                                 <Avatar radius="full" src={profile?.avatar || ''} size="4" fallback="avatar"/>
                                 <Link className="font-bold" href={`/users/${profile?.username}`}>{profile?.username}</Link>

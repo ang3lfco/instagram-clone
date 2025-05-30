@@ -12,7 +12,7 @@ export default async function HomeTopRow({follows, profiles}:{follows:Follower[]
                 <p className="text-center text-gray-400 text-sm">Add story</p>
             </div>
             {profiles.map(profile => (
-                <div className="w-24 flex flex-col justify-center items-center">
+                <div key={profile.id} className="w-24 flex flex-col justify-center items-center">
                     <div>
                         <div className="inline-block p-1 rounded-full bg-gradient-to-tr from-ig-orange to-ig-red">
                             <div className="p-0.5 bg-white rounded-full">

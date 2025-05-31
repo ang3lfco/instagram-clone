@@ -31,15 +31,15 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
             router.refresh();
         }}>
             <input type="hidden" name="avatar" value={avatar || ''}/>
-            <div className="flex gap-2 items-center">
+            <div className="flex flex-col items-center">
                 <div>
                     <div className="bg-gray-400 size-24 rounded-full aspect-square overflow-hidden shadow-md shadow-gray-400">
                         <img className="size-24" src={avatar || ''} alt=""/>
                     </div>
                 </div>
-                <div>
+                <div className="mt-2">
                     <input type="file" ref={fileInRef} className="hidden" onChange={ev => setFile(ev.target.files?.[0] || null)}/>
-                    <Button type="button" variant="soft" onClick={() => fileInRef.current?.click()}>
+                    <Button className="!cursor-pointer" type="button" variant="soft" onClick={() => fileInRef.current?.click()}>
                         <CloudUpload/>
                         change avatar
                     </Button>
@@ -58,7 +58,7 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
             <TextArea name="bio" defaultValue={profile?.bio || ''}/>
             
             <div className="mt-4 flex justify-center">
-                <Button variant="solid">Save settings</Button>
+                <Button variant="solid" className="!cursor-pointer">Save settings</Button>
             </div>
         </form>
     );

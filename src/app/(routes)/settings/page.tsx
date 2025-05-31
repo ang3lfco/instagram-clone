@@ -12,13 +12,10 @@ export default async function SettingsPage(){
         where: {email: session.user.email},
     });
     return(
-        <div className="max-w-sm mx-auto">
-            <h1 className="text-2xl font-bold mb-4 text-center">
+        <div className="max-w-sm mx-auto mt-3">
+            <h1 className="text-xl font-bold mb-4 ">
                 Profile settings
             </h1>
-            {/* <p className="text-gray-500 text-xs text-center -mt-4">
-                {session.user.email}
-            </p> */}
             <SettingsForm profile={profile} />
             <div className="flex justify-center mt-2 pt-2 border-t border-gray-200">
                 <form action={async () => {

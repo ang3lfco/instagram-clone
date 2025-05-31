@@ -22,14 +22,11 @@ export default async function SearchResults({query}: {query:string}){
     })
     return(
         <div>
-            {/* <h1 className="text-sm mt-4">
-                Search results for "{query}"
-            </h1> */}
-            <h1 className="text-sm mt-4">
-                Profiles found: 
-            </h1>
-            {profiles?.length > 0 && (
+            {profiles?.length > 0 ? (
                 <div className="grid mt-4 sm:grid-cols-1 gap-2">
+                    <h1 className="text-sm mt-4">
+                        Profiles found: 
+                    </h1>
                     {profiles.map(profile => (
                         <Link href={`/users/${profile.username}`} className="flex items-center gap-2 hover:bg-gray-100 transition p-2 rounded-lg">
                             <div>
@@ -42,13 +39,23 @@ export default async function SearchResults({query}: {query:string}){
                         </Link>
                     ))}
                 </div>
+            ) : (
+                <h1 className="text-sm mt-4">
+                    No profiles found.
+                </h1>
             )}
-             <h1 className="text-sm mt-4">
-                Posts found: 
-            </h1>
-            <div className="mt-4">
-                <PostsGrid posts={posts}/>
-            </div>
+            {posts.length > 0 ? (
+                <div className="mt-4">
+                    <h1 className="text-sm mt-4">
+                        Posts found: 
+                    </h1>
+                    <PostsGrid posts={posts}/>
+                </div>
+            ) : (
+                <h1 className="text-sm mt-4">
+                    No posts found.
+                </h1>
+            )}
         </div>
     );
 }

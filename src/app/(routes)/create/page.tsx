@@ -42,7 +42,7 @@ export default function CreatePage(){
     }, []);
     return(
         <div className="flex items-center justify-center min-h-screen">
-            <form className="w-full max-w-md bg-white shadow-md rounded-md p-6" action={async data => {
+            <form className="w-full max-w-md p-3" action={async data => {
                 const id = await postEntry(data);
                 router.replace(`/posts/${id}`);
                 router.refresh();
@@ -50,7 +50,7 @@ export default function CreatePage(){
                 <input type="hidden" name="image" value={imageUrl}/>
                 <div className="flex flex-col gap-4">
                     <div>
-                        <div className="min-h-64 p-2 bg-gray-400 rounded-md relative">
+                        <div className="min-h-64 p-2 bg-gray-200 rounded-md relative">
                             {imageUrl && (
                                 <img src={imageUrl} className="rounded-md" alt=""/>
                             )}
@@ -77,7 +77,7 @@ export default function CreatePage(){
                     <div className="flex flex-col gap-2 mb-4">
                         <TextArea name="description" className="h-16" placeholder="Add post description..."/>
                     </div>
-                    <Button>
+                    <Button className="!cursor-pointer">
                         <Send size={16}/>
                         Publish
                     </Button>

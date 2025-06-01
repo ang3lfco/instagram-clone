@@ -22,7 +22,7 @@ export default async function SettingsPage(){
                     'use server';
                     await signOut();
                 }}>
-                    <Button type="submit" variant="outline">Log out</Button>
+                    <Button className="!cursor-pointer" type="submit" variant="outline">Log out</Button>
                 </form>
             </div>
         </div>

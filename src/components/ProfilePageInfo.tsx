@@ -2,9 +2,10 @@ import { Follower, Profile } from "@prisma/client";
 import { Check, ChevronLeft, Settings} from "lucide-react";
 import Link from "next/link"
 import FollowButton from "./FollowButton";
+import { prisma } from "@/db";
 
 
-export default function ProfilePageInfo({
+export default async function ProfilePageInfo({
     profile,
     isOurProfile,
     ourFollow
@@ -13,6 +14,16 @@ export default function ProfilePageInfo({
     isOurProfile:boolean;
     ourFollow:Follower|null;
 }){
+    const following = await prisma.follower.count({
+        where: {
+            followingProfileId: {equals: profile.id},
+        }
+    });
+    const followers = await prisma.follower.count({
+        where: {
+            followedProfileId: {equals: profile.id},
+        }
+    });
     return(
         <div>
             <section className="flex justify-between items-center">
@@ -48,6 +59,10 @@ export default function ProfilePageInfo({
                 <p>
                     {profile.bio}
                 </p>
+                <div className="flex justify-center items-center gap-4 p-2 border-b border-b-gray-200 pb-4">
+                    <p><span className="font-bold">{following}</span> <span className="text-gray-500">following</span></p>
+                    <p><span className="font-bold">{followers}</span> <span className="text-gray-500">followers</span></p>
+                </div>
             </section>
             {!isOurProfile && (
                 <section className="flex justify-center my-5">

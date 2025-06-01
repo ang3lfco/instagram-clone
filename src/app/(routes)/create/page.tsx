@@ -56,7 +56,7 @@ export default function CreatePage(){
                             )}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef}/>
-                                <Button disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
+                                <Button className="!cursor-pointer" disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
                                     {!isUploading && (
                                         <CloudUpload size={16}/>
                                     )}

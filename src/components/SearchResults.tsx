@@ -28,7 +28,7 @@ export default async function SearchResults({query}: {query:string}){
                         Profiles found: 
                     </h1>
                     {profiles.map(profile => (
-                        <Link href={`/users/${profile.username}`} className="flex items-center gap-2 hover:bg-gray-100 transition p-2 rounded-lg">
+                        <Link key={profile.id} href={`/users/${profile.username}`} className="flex items-center gap-2 hover:bg-gray-100 transition p-2 rounded-lg">
                             <div>
                                 <Avatar size="5" radius="full" fallback="user avatar" src={profile.avatar || ''}/>
                             </div>

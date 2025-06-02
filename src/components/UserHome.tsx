@@ -1,7 +1,6 @@
 import { Session } from "next-auth";
 import HomeTopRow from "./HomeTopRow";
 import { prisma } from "@/db";
-import { getSessionEmailOrThrow } from "@/actions";
 import HomePosts from "./HomePosts";
 
 export default async function UserHome({session}:{session:Session}){

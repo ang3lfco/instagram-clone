@@ -1,5 +1,4 @@
 'use client';
-import { prisma } from "@/db";
 import { CloudUpload } from "lucide-react";
 import { Button, TextArea, TextField } from "@radix-ui/themes";
 import { updateProfile } from "@/actions";

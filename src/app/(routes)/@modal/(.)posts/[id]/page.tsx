@@ -1,4 +1,3 @@
-
 import Modal from "@/components/Modal";
 import ModalPostContent from "@/components/ModalPostContent";
 import Preloader from "@/components/Preloader";

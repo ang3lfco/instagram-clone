@@ -1,4 +1,4 @@
-import { getSessionEmail, getSessionEmailOrThrow } from "@/actions";
+import { getSessionEmail } from "@/actions";
 import ProfilePageContent from "@/components/ProfilePageContent";
 import { prisma } from "@/db";
 

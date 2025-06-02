@@ -1,5 +1,5 @@
 'use client';
-import { Button, TextArea } from "@radix-ui/themes";
+import { TextArea } from "@radix-ui/themes";
 import { postComment } from "@/actions";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";

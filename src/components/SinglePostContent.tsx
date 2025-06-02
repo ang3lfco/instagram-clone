@@ -1,7 +1,6 @@
 import Comment from "@/components/Comment";
 import SessionComentForm from "@/components/SessionCommentForm";
 import { Suspense } from "react";
-import { BookmarkIcon} from "lucide-react";
 import LikesInfo from "@/components/LikesInfo";
 import { Bookmark, Comment as CommentModel, Like, Post, Profile } from "@prisma/client";
 import Preloader from "./Preloader";

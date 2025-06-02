@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, Home, LayoutGrid, Search, SquarePlus, User } from "lucide-react";
+import { Home, LayoutGrid, Search, SquarePlus, User } from "lucide-react";
 
 export default function DesktopNav(){
     return(

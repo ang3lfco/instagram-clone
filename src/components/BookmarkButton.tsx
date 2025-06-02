@@ -1,5 +1,5 @@
 'use client';
-import { bookmarkPost, likePost, unbookmarkPost } from "@/actions";
+import { bookmarkPost, unbookmarkPost } from "@/actions";
 import { Like, Post } from "@prisma/client";
 import { BookmarkIcon, Heart } from "lucide-react";
 import { useRouter } from "next/navigation";

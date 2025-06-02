@@ -1,7 +1,7 @@
 'use client';
 import { bookmarkPost, unbookmarkPost } from "@/actions";
 import { Like, Post } from "@prisma/client";
-import { BookmarkIcon, Heart } from "lucide-react";
+import { BookmarkIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -16,7 +16,7 @@ export default function BookmarkButton({
     const [bookmarkedByMe, setBookmarkedByMe] = useState(!!sessionBookmark);
     return(
         <form
-            action={async(data:FormData) => {
+            action={async() => {
                 setBookmarkedByMe(prev => !prev);
                 if(bookmarkedByMe){
                     //remove bookmark

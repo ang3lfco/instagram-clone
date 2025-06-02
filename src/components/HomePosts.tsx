@@ -1,5 +1,5 @@
 import { prisma } from "@/db";
-import { Follower, Profile } from "@prisma/client";
+import { Profile } from "@prisma/client";
 import { Avatar } from "@radix-ui/themes";
 import LikesInfo from "./LikesInfo";
 import { getSessionEmailOrThrow } from "@/actions";
@@ -7,7 +7,7 @@ import Link from "next/link";
 import BookmarkButton from "./BookmarkButton";
 import FastComment from "./FastComment";
 
-export default async function HomePosts({follows, profiles}:{follows:Follower[], profiles:Profile[]}){
+export default async function HomePosts({profiles}:{profiles:Profile[]}){
     const posts = await prisma.post.findMany({
         where:{
             author: {in: profiles.map(p => p.email)},

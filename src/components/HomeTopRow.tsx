@@ -1,9 +1,9 @@
-import { Follower, Profile } from "@prisma/client";
+import { Profile } from "@prisma/client";
 import { Avatar } from "@radix-ui/themes";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
-export default async function HomeTopRow({follows, profiles}:{follows:Follower[], profiles:Profile[]}){
+export default async function HomeTopRow({profiles}:{profiles:Profile[]}){
     return(
         <div className="flex gap-3 max-w-full overflow-auto">
             <div>

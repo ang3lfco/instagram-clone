@@ -10,7 +10,7 @@ export async function getSessionEmail(): Promise<string|null|undefined>{
 }
 
 export async function getSessionEmailOrThrow(): Promise<string>{
-    const userEmail = getSessionEmail();
+    const userEmail = await getSessionEmail();
     if(!userEmail){
         throw 'not loggen in';
     }

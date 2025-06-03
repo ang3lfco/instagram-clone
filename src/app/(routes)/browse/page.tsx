@@ -6,6 +6,7 @@ export default async function BrowsePage(){
         orderBy: {createdAt: 'desc'},
         take: 100,
     });
+    console.log(posts);
     return(
         <div className="">
             <div className="p-8">

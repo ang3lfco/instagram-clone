@@ -1,8 +1,31 @@
 'use server';
+import bcrypt from "bcryptjs";
 import { auth } from "./auth";
 import { prisma } from "./db";
 import {uniq} from "lodash";
 
+export async function registerUser(email:string, password: string){
+    if(!email || !password){
+        throw new Error("Missing email or password");
+    }
+    const existing = await prisma.profile.findUnique({
+        where: {email},
+    });
+    if(existing){
+        throw new Error("User already exists");
+    }
+    const hashedPass = await bcrypt.hash(password, 10);
+    const user = await prisma.profile.create({
+        data: {
+            email,
+            password: hashedPass,
+        },
+    });
+    return{
+        id: user.id,
+        email: user.email,
+    };
+}
 
 export async function getSessionEmail(): Promise<string|null|undefined>{
     const session = await auth();

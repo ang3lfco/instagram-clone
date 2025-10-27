@@ -13,6 +13,9 @@ export default function CreatePage(){
     const router = useRouter();
     const [username, setUsername] = useState('');
     const [profilePic, setProfilePic] = useState('');
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     useEffect(() => {
         if(file){
             setIsUploading(true);
@@ -34,9 +37,10 @@ export default function CreatePage(){
         .then(res => res.json())
         .then(data => {
             if(!data.error){
-                console.log("username: " + data.username);
+                // console.log("username: " + data.username);
                 setUsername(data.username);
                 setProfilePic(data.avatar);
+                setIsLoggedIn(true);
             }
         })
     }, []);
@@ -55,8 +59,8 @@ export default function CreatePage(){
                                 <img src={imageUrl} className="rounded-md" alt=""/>
                             )}
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef}/>
-                                <Button className="!cursor-pointer" disabled={isUploading} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
+                                <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef} disabled={!isLoggedIn}/>
+                                <Button className="!cursor-pointer" disabled={isUploading || !isLoggedIn} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
                                     {!isUploading && (
                                         <CloudUpload size={16}/>
                                     )}

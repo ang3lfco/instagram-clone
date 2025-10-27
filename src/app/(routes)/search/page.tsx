@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import Preloader from "@/components/Preloader";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
@@ -8,6 +9,10 @@ export default async function SearchPage({
 }:{
     searchParams: Promise<{ query?: string }>;
 }){
+    const session = await auth();
+    if(!session?.user?.email){
+        return 'not logged in';
+    }
     const { query } = await searchParams;
     return(
         <div className="w-full">

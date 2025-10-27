@@ -21,6 +21,7 @@ model Profile {
   name String?
   subtitle String?
   bio String?
+  password String?
 }
 
 model Post{

@@ -27,7 +27,7 @@ export default async function Home(){
             </button>
           </form>
           <p className="mt-8">
-            Don't have an account?{" "}
+            Dont have an account?{" "}
             <a href="/register" className="text-blue-600">Sign up</a>
           </p>
         </div>

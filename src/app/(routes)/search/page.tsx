@@ -2,6 +2,7 @@ import { auth } from "@/auth";
 import Preloader from "@/components/Preloader";
 import SearchForm from "@/components/SearchForm";
 import SearchResults from "@/components/SearchResults";
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export default async function SearchPage({
@@ -11,7 +12,7 @@ export default async function SearchPage({
 }){
     const session = await auth();
     if(!session?.user?.email){
-        return 'not logged in';
+        redirect('/');
     }
     const { query } = await searchParams;
     return(

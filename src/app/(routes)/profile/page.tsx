@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 export default async function ProfilePage(){
     const session = await auth();
     if(!session?.user?.email){
-        return 'not logged in';
+        redirect('/');
     }
     const profile = await prisma.profile.findFirst({where:{email:session?.user?.email as string}});
     if(!profile){

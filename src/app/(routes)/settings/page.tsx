@@ -2,11 +2,12 @@ import { auth, signOut } from "@/auth";
 import SettingsForm from "@/components/SettingsForm";
 import { prisma } from "@/db";
 import { Button } from "@radix-ui/themes";
+import { redirect } from "next/navigation";
 
 export default async function SettingsPage(){
     const session = await auth();
     if(!session?.user?.email){
-        return 'not logged in';
+        redirect('/');
     }
     const profile = await prisma.profile.findFirst({
         where: {email: session.user.email},
@@ -17,12 +18,13 @@ export default async function SettingsPage(){
                 Profile settings
             </h1>
             <SettingsForm profile={profile} />
-            <div className="flex justify-center mt-2 pt-2 border-t border-gray-200">
+            <div className="flex justify-center mt-4 pt-4 border-t mb-10 border-gray-200">
                 <form action={async () => {
                     'use server';
                     await signOut();
+                    redirect('/');
                 }}>
-                    <Button className="!cursor-pointer" type="submit" variant="outline">Log out</Button>
+                    <Button className="!cursor-pointer " type="submit" variant="outline">Log out</Button>
                 </form>
             </div>
         </div>

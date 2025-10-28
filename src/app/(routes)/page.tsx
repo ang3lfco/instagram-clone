@@ -14,22 +14,27 @@ export default async function Home(){
         </Suspense>
       )}
       {!session && (
-        <div className="flex flex-col items-center mt-16">
-          <LoginPage/>
-          <hr className="w-80 my-6 border-t border-gray-300"/>
-          <form action={async () => {
-            'use server';
-            await signIn('google');
-          }}>
-            <button className="w-80 flex items-center justify-center gap-2 border px-4 py-2 bg-white text-gray-700 rounded-lg hover:bg-gray-100" type="submit">
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5"/>
-              Login with google
-            </button>
-          </form>
-          <p className="mt-8">
-            Dont have an account?{" "}
-            <a href="/register" className="text-blue-600">Sign up</a>
-          </p>
+        <div className=" w-full h-[600px] lg:px-40 flex lg:justify-between justify-center items-center ">
+          <div className="hidden lg:block">
+            <img className="w-[500px] h-[500px]" src="https://peach-gentle-xerinae-369.mypinata.cloud/ipfs/bafybeianeu7qyp7fnnoh43oirueo253ksg6bspgjoqln33zacmrnz4ikum" alt="" />
+          </div>
+          <div className=" flex flex-col items-center">
+            <LoginPage/>
+            <hr className="w-80 my-6 border-t border-gray-300"/>
+            <form action={async () => {
+              'use server';
+              await signIn('google');
+            }}>
+              <button className="w-80 flex items-center justify-center gap-2 border px-4 py-2 bg-white text-gray-700 rounded-lg hover:bg-gray-100" type="submit">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5"/>
+                Login with google
+              </button>
+            </form>
+            <p className="mt-8">
+              Dont have an account?{" "}
+              <a href="/register" className="text-blue-600">Sign up</a>
+            </p>
+          </div>
         </div>
       )}
     </div>

@@ -6,10 +6,13 @@ export async function POST(request: NextRequest) {
     const data = await request.formData();
     const file: File | null = data.get("file") as unknown as File;
     const groupId = process.env.PINATA_GROUP_ID;
-    const { cid } = await pinata.upload.public.file(file, {groupId});
-    const url = await pinata.gateways.public.convert(cid);
+    const { cid } = await pinata.upload.private.file(file, {groupId});
+    // const url = await pinata.gateways.private.createAccessLink({
+    //   cid: cid,
+    //   expires: 30
+    // });
     
-    return NextResponse.json(url, { status: 200 });
+    return NextResponse.json({cid}, {status: 200});
   } 
   catch(e){
     console.log(e);

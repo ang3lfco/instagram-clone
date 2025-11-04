@@ -45,13 +45,13 @@ export default async function HomePosts({profiles}:{profiles:Profile[]}){
                         <div className="flex mt-2 items-center gap-2 justify-between mb-3">
                             <div className="flex gap-2 items-center">
                                 <Link href={`/users/${profile?.username}`}>
-                                    <Avatar radius="full" src={profile?.avatar || ''} size="4" fallback="avatar"/>
+                                    <Avatar radius="full" src={profile?.avatar ? `/api/image/${profile.avatar}` : '/default-avatar.png'} size="4" fallback="avatar"/>
                                 </Link>
                                 <Link className="font-bold" href={`/users/${profile?.username}`}>{profile?.username}</Link>
                             </div>
                         </div>
                         <Link href={`/posts/${post.id}`}>
-                            <img className="block rounded-md border border-gray-300" src={post.image} alt=""/>
+                            <img className="block rounded-md border border-gray-300" src={`/api/image/${post.image}`} alt=""/>
                         </Link>
                         <div className="flex mt-4 mb-4 items-center gap-2 justify-between">
                             <div className="flex mt-2">

@@ -32,7 +32,7 @@ export default function BookmarkButton({
             className="flex items-center gap-2">
                 <input type="hidden" name="postId" value={post.id}/>
                 <button type="submit" >
-                    <BookmarkIcon className={bookmarkedByMe ? 'fill-gray-800' : ''}/>
+                    <BookmarkIcon className={bookmarkedByMe ? 'fill-ig-lightblue' : ''}/>
                 </button>
         </form>
     );

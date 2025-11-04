@@ -29,7 +29,15 @@ export default async function BookmarkedPage(){
             <ProfilePageInfo profile={profile} isOurProfile={true} ourFollow={null}/>
             <ProfileNav username={profile.username || ''} isOurProfile={true}/>
             <div className="mt-4">
-                <PostsGrid posts={posts} />
+                {posts.length > 0 ? (
+                    <PostsGrid posts={posts} />
+                ) : (
+                    <div className="text-center text-gray-500 mt-10">
+                        <p className="text-lg font-medium">No saved posts</p>
+                        <p className="text-sm text-gray-400">Save posts to see them here later.</p>
+                    </div>
+                )}
+                
             </div>
         </div>
     );

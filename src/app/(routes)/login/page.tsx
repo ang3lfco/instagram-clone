@@ -19,7 +19,7 @@ export default function LoginPage(){
     <div className=" flex flex-col justify-center items-center">
       <div className="flex flex-col items-center justify-center p-4 ">
         {/* <h1 className="text-2xl font-semibold mb-6">Login</h1> */}
-        <img className="" src="https://1000marcas.net/wp-content/uploads/2019/11/Logo-Instagram-500x281.png" width={200} alt=""/>
+        <img className="" src="https://peach-gentle-xerinae-369.mypinata.cloud/ipfs/bafybeidfokam2ropi4ct34ryclrqrq277qeovj7zt24pwrllzun3xjfsmi" width={200} alt=""/>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
           <input type="text" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded p-2"/>
           <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded p-2"/>

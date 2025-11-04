@@ -23,9 +23,9 @@ export default async function SinglePostContent({
 }){
     return(
         <div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-2 gap-4 lg:p-12">
                 <div>
-                    <img className="rounded-md" src={post.image} alt={post.description}/>
+                    <img className="rounded-md" src={`/api/image/${post.image}`} alt={post.description}/>
                 </div>
                 <div>
                     <Comment createdAt={post.createdAt} text={post.description} authorProfile={authorProfile}/>

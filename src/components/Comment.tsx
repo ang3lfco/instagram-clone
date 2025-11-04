@@ -1,12 +1,15 @@
 import { Profile } from "@prisma/client";
 import Avatar from "./Avatar";
 import {format} from 'date-fns';
+import Link from "next/link";
 
 export default function Comment({text, createdAt, authorProfile}:{text:string, createdAt: Date, authorProfile?:Profile}){
     return(
         <div className="flex gap-2">
             <div>
-                <Avatar src={authorProfile?.avatar || ''}/>
+                <Link href={`/users/${authorProfile?.username}`}>
+                    <Avatar src={authorProfile?.avatar ? `/api/image/${authorProfile.avatar}` : '/default-avatar.png'}/>
+                </Link>
             </div>
             <div className="w-full">
                 <div className="flex justify-between gap-2">

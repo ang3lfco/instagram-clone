@@ -11,6 +11,8 @@ export default {
       colors: {
         'ig-red': "var(--red)",
         'ig-orange': "var(--orange)",
+        'ig-blue': '#046FC2',
+        'ig-lightblue': '#4FC3F7'
       },
     },
   },

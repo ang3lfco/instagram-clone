@@ -16,7 +16,7 @@ export default async function Home(){
       {!session && (
         <div className=" w-full h-[600px] lg:px-40 flex lg:justify-between justify-center items-center ">
           <div className="hidden lg:block">
-            <img className="w-[500px] h-[500px]" src="https://peach-gentle-xerinae-369.mypinata.cloud/ipfs/bafybeianeu7qyp7fnnoh43oirueo253ksg6bspgjoqln33zacmrnz4ikum" alt="" />
+            <img className="w-[500px] h-[500px]" src="https://peach-gentle-xerinae-369.mypinata.cloud/ipfs/bafybeid6gqyracaitdzuwfeo3tgajnf2yabwkptnpz47jorvnj5y663uti" alt="" />
           </div>
           <div className=" flex flex-col items-center">
             <LoginPage/>
@@ -33,6 +33,9 @@ export default async function Home(){
             <p className="mt-8">
               Dont have an account?{" "}
               <a href="/register" className="text-blue-600">Sign up</a>
+            </p>
+            <p className="text-sm w-80 mt-10 text-justify">
+              ⚠ Test app for educational purposes. The information you provide is your own responsibility.
             </p>
           </div>
         </div>

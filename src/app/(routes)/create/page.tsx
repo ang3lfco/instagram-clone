@@ -24,12 +24,14 @@ export default function CreatePage(){
             fetch("/api/upload", {
                 method: "POST",
                 body: data,
-            }).then(response => {
-                response.json().then(url => {
-                    setImageUrl(url);
-                    setIsUploading(false);
-                });
-            });
+            }).then((response) => response.json()).then(({cid}) => {setImageUrl(cid), setIsUploading(false);}).catch((err) => console.error("Upload failed.", err));
+            
+            // .then(response => {
+            //     response.json().then(url => {
+            //         setImageUrl(url);
+            //         setIsUploading(false);
+            //     });
+            // });
         }
     }, [file]);
     useEffect(() => {
@@ -56,7 +58,7 @@ export default function CreatePage(){
                     <div>
                         <div className="min-h-64 p-2 bg-gray-200 rounded-md relative">
                             {imageUrl && (
-                                <img src={imageUrl} className="rounded-md" alt=""/>
+                                <img src={`/api/image/${imageUrl}`} className="rounded-md" alt=""/>
                             )}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef} disabled={!isLoggedIn}/>
@@ -73,7 +75,7 @@ export default function CreatePage(){
                 <div className="mt-4 justify-center border border-gray-100 p-4">
                     <div className="flex items-center mb-4">
                         {profilePic && (
-                            <img src={profilePic} alt="" className="w-10 rounded-full mr-2" />
+                            <img src={profilePic ? `/api/image/${profilePic}` : '/default-avatar.png'} alt="" className="w-10 rounded-full mr-2" />
                         )}
                         <div className="">{username}</div>
                         

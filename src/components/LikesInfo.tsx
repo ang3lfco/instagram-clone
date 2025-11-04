@@ -34,7 +34,7 @@ export default function LikesInfo({
             className="flex items-center gap-2">
                 <input type="hidden" name="postId" value={post.id}/>
                 <button type="submit" >
-                    <Heart className={likedByMe ? 'text-red-500 fill-red-500' : ''}/>
+                    <Heart className={likedByMe ? 'text-red-blue fill-ig-lightblue' : ''}/>
                 </button>
                 {showText && (
                     <p>

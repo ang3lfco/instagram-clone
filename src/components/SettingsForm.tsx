@@ -18,9 +18,7 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
             fetch("/api/upload", {
                 method: "POST",
                 body: data,
-            }).then(response => {
-                response.json().then(url => {setAvatar(url)});
-            });
+            }).then((response) => response.json()).then(({cid}) => {setAvatar(cid);}).catch((err) => console.error("Upload failed.", err));
         }
     }, [file]);
     return(
@@ -33,7 +31,7 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
             <div className="flex flex-col items-center">
                 <div>
                     <div className="bg-gray-400 size-24 rounded-full aspect-square overflow-hidden shadow-md shadow-gray-400">
-                        <img className="size-24" src={avatar || ''} alt=""/>
+                        <img className="size-24" src={avatar ? `/api/image/${avatar}` : '/default-avatar.png'} alt=""/>
                     </div>
                 </div>
                 <div className="mt-2">

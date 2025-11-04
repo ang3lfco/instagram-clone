@@ -31,9 +31,9 @@ export default async function ProfilePageInfo({
                     <ChevronLeft/>
                 </button>
                 <button className="font-bold flex items-center gap-2">
-                    {profile.username}
-                    <div className="size-5 rounded-full bg-ig-red inline-flex justify-center items-center text-white">
-                        <Check size={16}/>
+                    {profile.username || 'username'}
+                    <div className="size-5 rounded-full bg-ig-blue inline-flex justify-center items-center text-white">
+                        <Check size={16} color="white"/>
                     </div>
                 </button>
                 <div>
@@ -45,10 +45,10 @@ export default async function ProfilePageInfo({
                 </div>
             </section>
             <section className="mt-8 flex justify-center">
-                <div className="size-48 p-2 rounded-full bg-gradient-to-tr from-ig-orange to-ig-red">
+                <div className="size-48 p-2 rounded-full bg-gradient-to-tr from-ig-lightblue to-ig-blue">
                     <div className="size-44 p-2 bg-white rounded-full">
                         <div className="size-40 aspect-square overflow-hidden rounded-full ">
-                            <img className="" src={profile.avatar || ''} alt=""/>
+                            <img className="w-full h-full object-cover" src={profile.avatar ? `/api/image/${profile.avatar}` : '/default-avatar.png'} alt=""/>
                         </div>
                     </div>
                 </div>

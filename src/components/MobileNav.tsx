@@ -16,7 +16,7 @@ export default function MobileNav(){
               <div className="size-14 relative -top-4 justify-center w-[125px]">
                 <div className="absolute bg-blue-500 bg-clip-text border-white border-t-transparent border-l-transparent border-[50px] rounded-full rotate-45">
                   <div className="border-4 size-15 border-transparent">
-                    <Link href="/create" className="-rotate-45 bg-gradient-to-tr from-ig-orange to-ig-red size-12 flex items-center justify-center text-white rounded-full ">
+                    <Link href="/create" className="-rotate-45 bg-gradient-to-tr from-ig-lightblue to-ig-blue size-12 flex items-center justify-center text-white rounded-full ">
                       <Camera/>
                     </Link>
                   </div>
@@ -26,7 +26,7 @@ export default function MobileNav(){
                 <Link href="/browse" className="">
                   <LayoutGrid/>
                 </Link>
-                <Link href="/profile" className="text-ig-red ">
+                <Link href="/profile" className="text-ig-blue ">
                   <User/>
                 </Link>
               </div>

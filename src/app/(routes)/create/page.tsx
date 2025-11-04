@@ -24,7 +24,7 @@ export default function CreatePage(){
             fetch("/api/upload", {
                 method: "POST",
                 body: data,
-            }).then((response) => response.json()).then(({cid}) => {setImageUrl(cid), setIsUploading(false);}).catch((err) => console.error("Upload failed.", err));
+            }).then((response) => response.json()).then(({cid}) => {setImageUrl(cid); setIsUploading(false);}).catch((err) => console.error("Upload failed.", err));
             
             // .then(response => {
             //     response.json().then(url => {

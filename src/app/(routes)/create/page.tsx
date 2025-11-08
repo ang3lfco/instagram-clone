@@ -61,7 +61,23 @@ export default function CreatePage(){
                                 <img src={`/api/image/${imageUrl}`} className="rounded-md" alt=""/>
                             )}
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <input onChange={ev => setFile(ev.target.files?.[0] || null)} className="hidden" type="file" ref={fileInRef} disabled={!isLoggedIn}/>
+                                <input
+                                    onChange={ev => {
+                                        const f = ev.target.files?.[0];
+                                        if(!f) return;
+                                        if(!["image/png", "image/jpeg", "image/jpg"].includes(f.type)){
+                                            alert("PNG or JPG images only");
+                                            ev.target.value = "";
+                                            return;
+                                        }
+                                        setFile(f);
+                                    }}
+                                    className="hidden" 
+                                    type="file" 
+                                    ref={fileInRef} 
+                                    disabled={!isLoggedIn}
+                                    accept="image/png, image/jpeg, image/jpg"
+                                />
                                 <Button className="!cursor-pointer" disabled={isUploading || !isLoggedIn} onClick={() => fileInRef?.current?.click()} type="button" variant="surface">
                                     {!isUploading && (
                                         <CloudUpload size={16}/>

@@ -42,6 +42,20 @@ export async function getSessionEmailOrThrow(): Promise<string>{
 
 export async function updateProfile(data: FormData){
     const userEmail = await getSessionEmailOrThrow();
+
+    // username already validated on the client
+    // someone could make a manual request to the endpoint 
+    // and could end up saving an invalid username in the database
+    const username = data.get("username")?.toString() || "";
+    const name = data.get("name")?.toString() || "";
+
+    if(!/^[a-zA-Z0-9]+$/.test(username)){
+        throw new Error("Invalid username format: Only letters and numbers are allowed");
+    }
+    if(!/^[a-zA-Z ]+$/.test(name)){
+        throw new Error("Invalid name format: Only letters are allowed");
+    }
+
     const newUserInfo = {
         username: data.get('username') as string,
         name: data.get('name') as string,

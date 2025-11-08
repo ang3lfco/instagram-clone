@@ -22,11 +22,29 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
         }
     }, [file]);
     return(
-        <form action={async (data:FormData) => {
-            await updateProfile(data);
-            router.push('/profile');
-            router.refresh();
-        }}>
+        <form
+            onSubmit={(e) => {
+                const form = e.currentTarget;
+                const username = form.username.value;
+                const regex = /^[a-zA-Z0-9]+$/;
+
+                if(!regex.test(username)){
+                    e.preventDefault();
+                    alert("Invalid username format: Only letters and numbers are allowed");
+                    return;
+                }
+            }}
+            action={async (data:FormData) => {
+                try{
+                    await updateProfile(data);
+                    router.push('/profile');
+                    router.refresh();
+                }
+                catch(err: any){
+                    alert(err.message);
+                }
+            }}
+        >
             <input type="hidden" name="avatar" value={avatar || ''}/>
             <div className="flex flex-col items-center">
                 <div>
@@ -43,10 +61,40 @@ export default function SettingsForm({profile}:{profile?: Profile | null}){
                 </div>
             </div>
             <p className="mt-2 font-bold">username</p>
-            <TextField.Root name="username" defaultValue={profile?.username || ''} placeholder="your_username"/>
+            <TextField.Root 
+                name="username" 
+                defaultValue={profile?.username || ''} 
+                placeholder="your_username"
+                onKeyDown={(e) => {
+                    const allowedFormat = /^[a-zA-Z0-9]$/;
+                    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"];
+                    if (allowedKeys.includes(e.key)) return;
+                    if(!allowedFormat.test(e.key)){
+                        e.preventDefault();
+                    }
+                }}
+                onChange={(e) => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
+                }}
+            />
             
             <p className="mt-2 font-bold">name</p>
-            <TextField.Root name="name" defaultValue={profile?.name || ''} placeholder="John Doe"/>
+            <TextField.Root 
+                name="name" 
+                defaultValue={profile?.name || ''} 
+                placeholder="John Doe"
+                onKeyDown={(e) => {
+                    const allowedFormat = /^[a-zA-Z ]$/;
+                    const allowedKeys = ["Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"];
+                    if (allowedKeys.includes(e.key)) return;
+                    if(!allowedFormat.test(e.key)){
+                        e.preventDefault();
+                    }
+                }}
+                onChange={(e) => {
+                    e.target.value = e.target.value.replace(/[^a-zA-Z0-9 ]/g, "");
+                }}
+            />
             
             <p className="mt-2 font-bold">subtitle</p>
             <TextField.Root name="subtitle" defaultValue={profile?.subtitle || ''} placeholder="Graphic designer"/>

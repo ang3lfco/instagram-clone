@@ -94,7 +94,6 @@ export default function CreatePage(){
                             <img src={profilePic ? `/api/image/${profilePic}` : '/default-avatar.png'} alt="" className="w-10 rounded-full mr-2" />
                         )}
                         <div className="">{username}</div>
-                        
                     </div>
                     <div className="flex flex-col gap-2 mb-4">
                         <TextArea name="description" className="h-16" placeholder="Add post description..."/>

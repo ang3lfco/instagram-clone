@@ -1,6 +1,5 @@
 import { prisma } from "@/db";
 import { Avatar } from "@radix-ui/themes";
-import { Check } from "lucide-react";
 import Link from "next/link";
 
 export default async function SuggestedPeople(){

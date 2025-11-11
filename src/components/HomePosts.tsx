@@ -40,7 +40,7 @@ export default async function HomePosts({profiles}:{profiles:Profile[]}){
             {posts.length === 0 && (
                 <div className="mt-20">
                     <p className="text-center text-gray-500 ">
-                        You haven't added any friends yet — start connecting!
+                        You havent added any friends yet — start connecting!
                     </p>
                 </div>
             )}
@@ -48,7 +48,7 @@ export default async function HomePosts({profiles}:{profiles:Profile[]}){
                 const profile = profiles.find(p => p.email === post.author);
                 const commentsOnPost = allCommentsOnPosts.filter(c => c.postId === post.id);
                 return (
-                    <div className="max-w-md mx-auto flex flex-col gap-12">
+                    <div key={post.id} className="max-w-md mx-auto flex flex-col gap-12">
                         <div key={post.id} className="border border-gray-200 p-2 rounded-xl">
                             <div className="flex mt-2 items-center gap-2 justify-between mb-3">
                                 <div className="flex gap-2 items-center">

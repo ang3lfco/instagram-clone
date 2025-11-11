@@ -1,16 +1,17 @@
+'use client';
 import { Profile } from "@prisma/client";
 import { Avatar } from "@radix-ui/themes";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 
-export default async function HomeTopRow({profiles}:{profiles:Profile[]}){
+export default function HomeTopRow({profiles}:{profiles:Profile[]}){
     return(
         <div className="flex gap-3 max-w-full overflow-auto">
-            <div>
+            <div onClick={() => alert("Function not available yet!")}>
                 <button className="size-24 bg-gradient-to-tr from-ig-lightblue to-ig-blue text-white rounded-full flex items-center justify-center">
                     <PlusIcon size="42"/>
                 </button>
-                <p className="text-center text-gray-500 text-sm">Add story</p>
+                <p className="text-center text-gray-500 text-sm cursor-pointer">Add story</p>
             </div>
             {profiles.map(profile => (
                 <div key={profile.id} className="w-24 flex flex-col justify-center items-center">
